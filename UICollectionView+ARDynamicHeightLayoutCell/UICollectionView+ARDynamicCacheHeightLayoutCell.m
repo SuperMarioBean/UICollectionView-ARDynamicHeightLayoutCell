@@ -238,7 +238,10 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
             }
         }
     }else{
-        [[self sizeCache] addObject:@[].mutableCopy];
+        NSInteger sectionCount = indexPath.section - [self sizeCache].count + 1;
+        for (unsigned int index = 0; index < sectionCount; index++) {
+            [[self sizeCache] addObject:@[].mutableCopy];
+        }
     }
     
     return hasCache;
