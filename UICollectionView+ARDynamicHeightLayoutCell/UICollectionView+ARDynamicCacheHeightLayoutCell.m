@@ -151,10 +151,11 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
 
 -(void)ar_deleteItemsAtIndexPaths:(NSArray *)indexPaths
 {
-    [indexPaths enumerateObjectsUsingBlock:^(NSIndexPath *obj, NSUInteger idx, BOOL *stop) {
-        NSMutableArray *section = [self sizeCache][obj.section];
-        [section removeObjectAtIndex:obj.row];
-    }];
+    [indexPaths enumerateObjectsWithOptions:NSEnumerationReverse
+                                 usingBlock:^(NSIndexPath *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                                     NSMutableArray *section = [self sizeCache][obj.section];
+                                     [section removeObjectAtIndex:obj.row];
+                                 }];
     [self ar_deleteItemsAtIndexPaths:indexPaths];
 }
 
