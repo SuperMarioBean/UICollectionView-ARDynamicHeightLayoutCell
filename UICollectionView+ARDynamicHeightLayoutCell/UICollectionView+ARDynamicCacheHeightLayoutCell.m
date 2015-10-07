@@ -134,7 +134,8 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
 
 -(void)ar_deleteSections:(NSIndexSet *)sections
 {
-    [sections enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+    [sections enumerateIndexesWithOptions:NSEnumerationReverse
+                               usingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
         [[self sizeCache] removeObjectAtIndex:idx];
     }];
     [self ar_deleteSections:sections];
