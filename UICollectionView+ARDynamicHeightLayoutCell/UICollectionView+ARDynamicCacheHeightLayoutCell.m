@@ -27,6 +27,7 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
     @selector(reloadData),
     @selector(reloadSections:),
     @selector(deleteSections:),
+    @selector(insertSections:),
     @selector(moveSection:toSection:),
     @selector(reloadItemsAtIndexPaths:),
     @selector(deleteItemsAtIndexPaths:),
@@ -145,6 +146,13 @@ typedef NS_ENUM(NSUInteger, ARDynamicSizeCaculateType) {
 {
     [[self sizeCache] exchangeObjectAtIndex:section withObjectAtIndex:newSection];
     [self ar_moveSection:section toSection:newSection];
+}
+
+- (void)ar_insertSections:(NSIndexSet *)sections {
+    [sections enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
+        [[self sizeCache] insertObject:@[].mutableCopy atIndex:idx];
+    }];
+    [self ar_insertSections:sections];
 }
 
 #pragma mark - item changes
